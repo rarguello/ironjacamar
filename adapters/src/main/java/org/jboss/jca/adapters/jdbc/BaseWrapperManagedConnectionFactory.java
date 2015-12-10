@@ -209,6 +209,9 @@ public abstract class BaseWrapperManagedConnectionFactory
    /** URL selector strategy class name */
    protected String urlSelectorStrategyClassName;
 
+   /** Wait time to retry URL for HA DS, in milliseconds */
+   protected Integer urlRetryWaitMillis = Integer.valueOf(0);
+
    /** Whether to use a try lock */
    private Integer useTryLock = Integer.valueOf(60);
 
@@ -1021,6 +1024,24 @@ public abstract class BaseWrapperManagedConnectionFactory
    public void setUrlSelectorStrategyClassName(String urlSelectorStrategyClassName)
    {
       this.urlSelectorStrategyClassName = urlSelectorStrategyClassName;
+   }
+
+   /**
+    * Get the wait time to retry URL for HA DS, in milliseconds
+    * @return The value
+    */
+   public Integer getUrlRetryWaitMillis()
+   {
+      return urlRetryWaitMillis;
+   }
+
+   /**
+    * Set the wait time to retry URL for HA DS, in milliseconds
+    * @param urlRetryWaitMillis The value
+    */
+   public void setUrlRetryWaitMillis(Integer urlRetryWaitMillis)
+   {
+      this.urlRetryWaitMillis = urlRetryWaitMillis;
    }
 
    /**
