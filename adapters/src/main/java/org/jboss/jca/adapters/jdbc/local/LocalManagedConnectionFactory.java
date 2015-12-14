@@ -371,12 +371,12 @@ public class LocalManagedConnectionFactory extends BaseWrapperManagedConnectionF
             log.errorCreatingConnection(url, e);
             urlSelector.fail(url);
 
-            if (urlSelector.hasMore() && urlRetryWaitMillis > 0)
+            if (urlSelector.hasMore() && allocationRetryWaitMillis > 0)
             {
                try
                {
                   log.trace("Waiting to retry next URL...");
-                  Thread.sleep(urlRetryWaitMillis);
+                  Thread.sleep(allocationRetryWaitMillis);
                }
                catch (InterruptedException ie)
                {

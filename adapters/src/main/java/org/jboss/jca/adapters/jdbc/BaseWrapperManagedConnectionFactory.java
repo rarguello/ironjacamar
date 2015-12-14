@@ -201,6 +201,18 @@ public abstract class BaseWrapperManagedConnectionFactory
    protected Integer queryTimeout = Integer.valueOf(0);
 
    /**
+    * The number of times that allocating a connection should be
+    * tried before throwing an exception.
+    */
+   protected Integer allocationRetry = Integer.valueOf(0);
+
+   /**
+    * The time in milliseconds to wait between retrying to allocate
+    * a connection.
+    */
+   protected Integer allocationRetryWaitMillis = Integer.valueOf(0);
+
+   /**
     * The variable <code>urlDelimiter</code> holds the url delimiter
     * information to be used for HA DS configuration .
     */
@@ -208,9 +220,6 @@ public abstract class BaseWrapperManagedConnectionFactory
 
    /** URL selector strategy class name */
    protected String urlSelectorStrategyClassName;
-
-   /** Wait time to retry URL for HA DS, in milliseconds */
-   protected Integer urlRetryWaitMillis = Integer.valueOf(0);
 
    /** Whether to use a try lock */
    private Integer useTryLock = Integer.valueOf(60);
@@ -1027,21 +1036,39 @@ public abstract class BaseWrapperManagedConnectionFactory
    }
 
    /**
-    * Get the wait time to retry URL for HA DS, in milliseconds
+    * Get the number of times to retry allocation.
     * @return The value
     */
-   public Integer getUrlRetryWaitMillis()
+   public Integer getAllocationRetry()
    {
-      return urlRetryWaitMillis;
+      return allocationRetry;
    }
 
    /**
-    * Set the wait time to retry URL for HA DS, in milliseconds
-    * @param urlRetryWaitMillis The value
+    * Set the number of times to retyr allocation.
+    * @param allocationRetry The value
     */
-   public void setUrlRetryWaitMillis(Integer urlRetryWaitMillis)
+   public void setAllocationRetry(Integer allocationRetry)
    {
-      this.urlRetryWaitMillis = urlRetryWaitMillis;
+      this.allocationRetry = allocationRetry;
+   }
+
+   /**
+    * Get the time in milliseconds to wait between retrying allocations.
+    * @return The value
+    */
+   public Integer getAllocationRetryWaitMillis()
+   {
+      return allocationRetryWaitMillis;
+   }
+
+   /**
+    * Set the time in milliseconds to wait between retrying allocations.
+    * @param allocationRetryWaitMillis The value
+    */
+   public void setAllocationRetryWaitMillis(Integer allocationRetryWaitMillis)
+   {
+      this.allocationRetryWaitMillis = allocationRetryWaitMillis;
    }
 
    /**
